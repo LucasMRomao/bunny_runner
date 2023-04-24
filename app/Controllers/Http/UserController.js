@@ -49,6 +49,13 @@ class UserController {
         return await User.autenticar(data)
     }
 
+    async verificar_email({request}){
+        const data = request.only([
+            'email'
+        ])
+        return await User.verificar_email(data)
+    }
+
 }
 
 module.exports = UserController
