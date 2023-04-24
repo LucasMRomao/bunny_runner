@@ -19,7 +19,7 @@ class User extends Model {
     return Database.table("usuarios").select("*").where("email", email).where("senha", senha)
   }
 
-  static autenticar({email}){
+  static verificar_email({email}){
     if(email == null) return []
     return Database.table("usuarios").select("*").where("email", email)
   }
