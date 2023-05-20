@@ -41,7 +41,7 @@ class UserController {
         return await usuario.delete()
     }
 
-    async autenticar({request}){
+    /*async autenticar({request}){
         const data = request.only([
             'email',
             'senha'
@@ -54,6 +54,11 @@ class UserController {
             'email'
         ])
         return await User.verificar_email(data)
+    }*/
+
+    async get_dados({params}){
+        const client_id = params.client_id
+        return await User.getDados(client_id)
     }
 
 }

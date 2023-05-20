@@ -14,7 +14,7 @@ class User extends Model {
     return 'usuarios'
   }
 
-  static autenticar({email, senha}){
+  /*static autenticar({email, senha}){
     if(email == null || senha == null) return []
     return Database.table("usuarios").select("*").where("email", email).where("senha", senha)
   }
@@ -22,6 +22,11 @@ class User extends Model {
   static verificar_email({email}){
     if(email == null) return []
     return Database.table("usuarios").select("*").where("email", email)
+  }*/
+
+  static getDados(client_id){
+    if(client_id == null) return []
+    return Database.table("usuarios").select("*").where("client_id", client_id)
   }
 
   static boot () {
