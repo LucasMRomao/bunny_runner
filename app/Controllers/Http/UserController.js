@@ -15,8 +15,7 @@ class UserController {
 
     async store({request}){
         const data = request.only([
-            'email',
-            'senha',
+            'client_id',
             'save_data'
         ])
 
@@ -27,8 +26,7 @@ class UserController {
     async update({params, request}){
         const usuario = await User.findOrFail(params.id)
         const data = request.only([
-            'email',
-            'senha',
+            'client_id',
             'save_data'
         ])
         usuario.merge(data)
