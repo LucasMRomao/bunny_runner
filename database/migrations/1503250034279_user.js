@@ -8,7 +8,7 @@ class UserSchema extends Schema {
     this.create('usuarios', (table) => {
       table.increments().unsigned()
       table.string('client_id', 256).notNullable().unique()
-      table.string('save_data', 256)
+      table.string('save_data', 256).notNullable().defaultTo("")
       table.timestamps()
     })
   }
