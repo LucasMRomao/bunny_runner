@@ -29,6 +29,9 @@ class UserController {
             'client_id',
             'save_data'
         ])
+
+        if(!data['save_data']) data['save_data'] = ""
+
         usuario.merge(data)
         await usuario.save()
         return usuario
