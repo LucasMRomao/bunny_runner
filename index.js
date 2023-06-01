@@ -18,7 +18,7 @@ function montarSave(save_data){
 
     console.log(stages);
 
-    ordenar(stages, stars);
+    //ordenar(stages, stars);
 
     console.log(stages);
 
