@@ -62,11 +62,11 @@ class UserController {
     }
 
     async set_dados({request, params}){
-        const client_id = params.client_id
+        const user_id = params.user_id
         const data = request.only([
             'save_data'
         ])
-        return await User.setDados(client_id, data)
+        return await User.setDados(user_id, data)
     }
 
     async save_level({request, params}){

@@ -23,7 +23,7 @@ Route.get('/', () => {
 Route.resource('/usuario', 'UserController')
 //Route.get('/autenticar', 'UserController.autenticar')
 Route.get('/usuario/getdados/:client_id', 'UserController.get_dados')
-Route.put('/usuario/setdados/:client_id', 'UserController.set_dados')
+Route.put('/usuario/setdados/:user_id', 'UserController.set_dados')
 Route.put('/usuario/savelevel/:user_id', 'UserController.save_level')
 Route.put('/usuario/resetuser/:user_id', 'UserController.reset_user')
 //Route.get('/verificaremail', 'UserController.verificar_email')

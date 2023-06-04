@@ -33,26 +33,31 @@ class User extends Model {
                     .orderBy("user_saves.level")
   }
 
-  static setDados(client_id, data){
-    if(client_id == null) return "no-client-id"
+  static setDados(user_id, data){
+    if(user_id == null) return "no-user-id"
+    User.limparSave(user_id)
     let save_data = data["save_data"]
     if (!save_data.length) return "no-save-data"
 
     for(var i in save_data){
-      if(!User.create_or_replace_level(client_id, save_data[i].level, save_data[i].stars)) return false
+      if(!User.create_or_replace_level(user_id, save_data[i].level, save_data[i].stars)) return false
     }
 
     return true
   }
 
-  static async create_or_replace_level(client_id, level, stars){
+  static async limparSave(user_id){
+    await Database.table("user_saves").where("user_id", user_id).delete()
+  }
+
+  static async create_or_replace_level(user_id, level, stars){
     let ret = await Database.table("user_saves")
-                      .where("user_id", client_id)
+                      .where("user_id", user_id)
                       .where("level", level)
                       .update({stars: stars})
     
     if(!ret){
-      ret = console.log(await Database.table("user_saves").insert({user_id: client_id, level: level, stars: stars}))
+      ret = console.log(await Database.table("user_saves").insert({user_id: user_id, level: level, stars: stars}))
     }
 
     return ret ? true : false
