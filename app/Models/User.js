@@ -58,6 +58,12 @@ class User extends Model {
     return ret ? true : false
   }
 
+  static async reset_user(user_id){
+    return await Database.table("user_saves")
+                          .where("user_id", user_id)
+                          .delete()
+  }
+
   static boot () {
     super.boot()
 

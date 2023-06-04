@@ -78,6 +78,10 @@ class UserController {
 
         return await User.create_or_replace_level(user_id, data.level, data.stars)
     }
+
+    async reset_user({params}){
+        return await User.reset_user(params.user_id)
+    }
 }
 
 module.exports = UserController
