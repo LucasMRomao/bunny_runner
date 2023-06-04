@@ -5,22 +5,40 @@ $(() => {
         success: (result) => {
             $("#tUsuarios>tbody").html("");
             for(i in result){
-                let $row = `<tr><td>${result[i].client_id}</td><td>${montarSave(result[i].save_data)}</td></tr>`;
-                $("#tUsuarios>tbody").append($row);
+                montarUsuario(result[i])
             }
         }
     })
 });
 
-function montarSave(save_data){
+function montarUsuario(usuario){
+    
+    let user_id = usuario.id
+    let client_id = usuario.client_id
+
+    let $row = `<tr><td>${user_id}</td><td id='user_save_${user_id}'></td></tr>`;
+
+    $("#tUsuarios>tbody").append($row);
+
+    loadSave(client_id, user_id);
+}
+
+function loadSave(client_id, user_id){
+    $.ajax({
+        url: "http://54.87.35.125:3333/usuario/getdados/" + client_id,
+        method: "GET",
+        success: (result) => {
+            for(var i in result){
+                let show = `<span class="badge bg-secondary" style="display: inline-flex;">${result[i].level}&nbsp;&nbsp;${montarStars(result[i].stars)}</span>`;
+                $(`#user_save_${user_id}`).append(show);
+            }
+        }
+    })
+}
+
+/*function montarSave(save_data){
     let stages = save_data.split(";;")[0].split(",");
     let stars = save_data.split(";;")[1].split(",");
-
-    console.log(stages);
-
-    //ordenar(stages, stars);
-
-    console.log(stages);
 
     let retorno = "";
 
@@ -30,31 +48,14 @@ function montarSave(save_data){
 
         console.log(stg);
 
-        let show = `<span class="badge bg-secondary">${stg}${montarStars(star)}</span>`;
+        let show = `<span class="badge bg-secondary" style="display: inline-flex;">${stg}&nbsp;&nbsp;${montarStars(star)}</span>`;
         retorno += show;
     }
 
     // console.log(retorno);
 
     return retorno;
-}
-
-function ordenar(stages, stars){
-    for(i in stages){
-        for(j in stages){
-            if(stages[i] < stages[j]){
-                let aux_stg = stages[i];
-                let aux_star = stars[i];
-                stages[i] = stages[j];
-                stars[i] = stars[j];
-                stages[j] = aux_stg;
-                stages[j] = aux_star;
-            }
-        }
-    }
-
-    // console.log(stages);
-}
+}*/
 
 function montarStars(stars){
     let ret = "";
