@@ -26,7 +26,36 @@ class User extends Model {
 
   static getDados(client_id){
     if(client_id == null) return []
-    return Database.table("usuarios").select("*").where("client_id", client_id)
+    return Database.table("usuarios")
+                    .leftJoin("user_saves", "usuarios.id", "user_saves.user_id")
+                    .select("usuarios.id", "usuarios.client_id", "user_saves.level", "user_saves.stars")
+                    .where("usuarios.client_id", client_id)
+                    .orderBy("user_saves.level")
+  }
+
+  static setDados(client_id, data){
+    if(client_id == null) return "no-client-id"
+    let save_data = data["save_data"]
+    if (!save_data.length) return "no-save-data"
+
+    for(var i in save_data){
+      if(!User.create_or_replace_level(client_id, save_data[i].level, save_data[i].stars)) return false
+    }
+
+    return true
+  }
+
+  static async create_or_replace_level(client_id, level, stars){
+    let ret = await Database.table("user_saves")
+                      .where("user_id", client_id)
+                      .where("level", level)
+                      .update({stars: stars})
+    
+    if(!ret){
+      ret = console.log(await Database.table("user_saves").insert({user_id: client_id, level: level, stars: stars}))
+    }
+
+    return ret ? true : false
   }
 
   static boot () {

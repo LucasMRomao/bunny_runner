@@ -23,4 +23,6 @@ Route.get('/', () => {
 Route.resource('/usuario', 'UserController')
 //Route.get('/autenticar', 'UserController.autenticar')
 Route.get('/usuario/getdados/:client_id', 'UserController.get_dados')
-Route.get('/verificaremail', 'UserController.verificar_email')
+Route.put('/usuario/setdados/:client_id', 'UserController.set_dados')
+Route.put('/usuario/savelevel/:user_id', 'UserController.save_level')
+//Route.get('/verificaremail', 'UserController.verificar_email')

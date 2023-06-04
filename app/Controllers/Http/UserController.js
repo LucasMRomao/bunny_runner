@@ -15,10 +15,9 @@ class UserController {
 
     async store({request}){
         const data = request.only([
-            'client_id',
-            'save_data'
+            'client_id'
         ])
-
+        console.log(data)
         const usuario = User.create(data)
         return usuario
     }
@@ -62,6 +61,23 @@ class UserController {
         return await User.getDados(client_id)
     }
 
+    async set_dados({request, params}){
+        const client_id = params.client_id
+        const data = request.only([
+            'save_data'
+        ])
+        return await User.setDados(client_id, data)
+    }
+
+    async save_level({request, params}){
+        const user_id = params.user_id
+        const data = request.only([
+            'level',
+            'stars'
+        ])
+
+        return await User.create_or_replace_level(user_id, data.level, data.stars)
+    }
 }
 
 module.exports = UserController
