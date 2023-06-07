@@ -1,3 +1,7 @@
+#tUsuarios{
+    font-size: 25px;
+}
+
 .five-pointed-star {
     --star-color:orange;
     margin:1em auto;
@@ -10,8 +14,9 @@
     border-bottom: 0.7em solid var(--star-color);
     border-left: 1em solid transparent;
     transform: rotate(35deg);
-   }
-   .five-pointed-star:before {
+}
+
+.five-pointed-star:before {
     border-bottom: 0.8em solid var(--star-color);
     border-left: 0.3em solid transparent;
     border-right: 0.3em solid transparent;
@@ -23,8 +28,9 @@
     display: block;
     content:"";
     transform: rotate(-35deg);
-   }
-   .five-pointed-star:after {
+}
+
+.five-pointed-star:after {
     position: absolute;
     display: block;
     top: 0.03em;
@@ -36,4 +42,4 @@
     border-left: 1em solid transparent;
     transform: rotate(-70deg);
     content:"";
-   }
+}
