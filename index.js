@@ -28,8 +28,16 @@ function loadSave(client_id, user_id){
         url: "http://54.87.35.125:3333/usuario/getdados/" + client_id,
         method: "GET",
         success: (result) => {
+            let empty = true;
             for(var i in result){
-                let show = `<span class="badge bg-secondary" style="display: inline-flex;">${result[i].level}&nbsp;&nbsp;${montarStars(result[i].stars)}</span>`;
+                if(result[i].level != null){
+                    let show = `<span class="badge bg-secondary" style="display: inline-flex;">${result[i].level}&nbsp;&nbsp;${montarStars(result[i].stars)}</span>`;
+                    $(`#user_save_${user_id}`).append(show);
+                    empty = false;
+                }
+            }
+            if(empty){
+                let show = `<span class="badge bg-secondary style="display: inline-flex;">Não há dados.<span>`;
                 $(`#user_save_${user_id}`).append(show);
             }
         }
